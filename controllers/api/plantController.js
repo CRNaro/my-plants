@@ -10,6 +10,7 @@ function getID() {
       .get(listUrl)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        return response.data;
       })
       .then(function (data) {
         let id = data.id;
