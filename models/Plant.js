@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Schedule = require('./Schedule');
+const User = require('./User');
 
 class Plant extends Model {}
 
@@ -8,8 +10,8 @@ Plant.init(
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true,
-            autoIncrement: true, //not sure if this should be auto-incremented, because I think we need to actual plant ID from the Plant List to connect the plant to the Plant Details which holds more data.
+            primaryKey: true,  // I took out the autoIncrement because 
+                               // I think we want to use the id from the API -CRN
         },
         common_name: {
             type: DataTypes.STRING,
@@ -27,7 +29,10 @@ Plant.init(
         poisonous_to_pets: {
             type: DataTypes.BOOLEAN,
         },
-        // not sure how to add the image url here
+        // url for plant image
+        image_url: {
+            type: DataTypes.STRING,
+        },
     },
     {
         sequelize,
