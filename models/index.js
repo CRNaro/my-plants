@@ -9,8 +9,12 @@ User.belongsToMany(Plant, { through: Schedule,
     onDelete: 'RESTRICT'
 });
 Plant.belongsToMany(User, { through: Schedule,
-    foreignKey: 'plant_id'
+    foreignKey: 'plant_id',
     onDelete: 'RESTRICT'
+});
+Schedule.belongsTo(Plant, {
+    foreignKey: 'plantId',
+    onDelete: 'RESTRICT',
 });
 
 Plant.hasMany(Schedule);
