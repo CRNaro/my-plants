@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const userControllers = require('./userControllers');
-const scheduleConntrollers = require('./scheduleController');
+const scheduleConntroller = require('./scheduleController');
 
 router.use('/user', userControllers);
-router.use('/schedule', scheduleConntrollers);
+router.use('/schedule', scheduleConntroller);
 
 module.exports = router;
