@@ -45,7 +45,8 @@ axios
     console.log(sunlight);
     let poisonous = data.poisonous_to_pets;
     console.log(poisonous);
-    let image = data.default_image.regular_url;
+    let image = data.default_image.regular_url
+    console.log(image);
   })
   .catch((error) => {
     console.log(error);
@@ -55,12 +56,12 @@ axios
 getID();
 
 const plantData = {
-  common_name: 'req.body.common_name',
+  commonName: 'req.body.common_name',
   description: 'req.body.description',
   watering: 'req.body.watering',
   sunlight: 'req.body.sunlight',
-  poisonous_to_pets: 'req.body.poisonous_to_pets',
-  image_url: 'req.body.image_url'
+  poisonous: 'req.body.poisonous_to_pets',
+  image: 'req.body.image_url'
 }
 
 fetch('/api/addPlant', {

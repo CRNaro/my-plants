@@ -42,14 +42,21 @@ app.set("view engine", "handlebars");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+app.get('./assets/css', (req, res) => {
+  res.type('text/css');
+});
 
-app.use((err, req, res, next) => {
+const middleware = (err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
-});
+  next();
+}
+
+app.use(middleware)
 
 
 sequelize
