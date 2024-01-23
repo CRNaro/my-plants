@@ -1,6 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 const plantInput = document.getElementById("user-input");
+const submitBtn = document.getElementById("submit-btn");
 
 // Plant List to get the plant ID
 function getID() {
@@ -75,3 +76,6 @@ fetch('/api/addPlant', {
 .catch(error => {
   console.error('Error:', error)
 })
+
+submitBtn.addEventListener("click", getID);
+
