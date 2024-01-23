@@ -70,6 +70,20 @@ router.get('/', async (req, res) => {
   };
   });
 
+  //Delete plant from list
+  router.delete('/plant/:id', async (req, res) => {
+    try{
+      const plantToDelete = await Plant.findByPk(req.params.id)
+      if(!plantToDelete) {
+        return res.status(404).json({ error: 'Plant not found'});
+      }
+      await plantToDelete.destroy();
+    res.json({ message: 'Product deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
   //Prevent access to page unless logged in
   router.get('/profile', withAuth, async (req, res) => {
