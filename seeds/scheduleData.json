@@ -2,7 +2,9 @@
 [
     {
         "plantName": "",
+        "plantDescription": "",
         "wateringInterval": "",
+        "sunlight": "",
         "isToxicToPets": ""
     }
 ]
