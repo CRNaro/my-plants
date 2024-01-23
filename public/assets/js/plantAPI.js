@@ -52,4 +52,31 @@ axios
   });
 }
 
+getID();
+
+const plantData = {
+  common_name: 'req.body.common_name',
+  description: 'req.body.description',
+  watering: 'req.body.watering',
+  sunlight: 'req.body.sunlight',
+  poisonous_to_pets: 'req.body.poisonous_to_pets',
+  image_url: 'req.body.image_url'
+}
+
+fetch('/api/addPlant', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(plantData)
+})
+.then(response=> response.json())
+.then(data => {
+  console.log('Success:', data);
+})
+.catch(error => {
+  console.error('Error:', error)
+})
+
 submitBtn.addEventListener("click", getID);
+
