@@ -46,6 +46,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+app.get('./assets/css', (req, res) => {
+  res.type('text/css');
+});
 
 const middleware = (err, req, res, next) => {
   console.error(err.stack);
