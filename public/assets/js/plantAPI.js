@@ -1,9 +1,11 @@
 const axios = require("axios");
 require("dotenv").config();
+const plantInput = document.getElementById("user-input");
+const submitBtn = document.getElementById("submit-btn");
 
 // Plant List to get the plant ID
 function getID() {
-  const userInput = element.value.trim(); //replace element with the element variable
+  const userInput = plantInput.value.trim(); 
   const listUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}`;
   if (userInput && userInput !== "") {
     axios
@@ -43,10 +45,11 @@ axios
     console.log(sunlight);
     let poisonous = data.poisonous_to_pets;
     console.log(poisonous);
+    let image = data.default_image.regular_url;
   })
   .catch((error) => {
     console.log(error);
   });
 }
 
-getID();
+submitBtn.addEventListener("click", getID);
