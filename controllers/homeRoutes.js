@@ -49,7 +49,28 @@ router.get('/', async (req, res) => {
       res.status(500).json(err);
     }
   });
-  
+
+  //Add plant to list
+  router.post('/addPlant', async (req, res) => {
+    try{
+    const plant = await Plant.create({
+      common_name: req.body.common_name,
+      description: req.body.description,
+      watering: req.body.watering,
+      sunlight: req.body.sunlight,
+      poisonous_to_pets: req.body.poisonous_to_pets,
+      image_url: req.body.image_url
+    });
+    res.status(201).json(plant);
+
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' })
+  };
+  });
+
+
   //Prevent access to page unless logged in
   router.get('/profile', withAuth, async (req, res) => {
     try {
