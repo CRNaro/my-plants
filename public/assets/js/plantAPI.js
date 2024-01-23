@@ -4,7 +4,7 @@ const plantInput = document.getElementById("user-input");
 
 // Plant List to get the plant ID
 function getID() {
-  const userInput = plantInput.value.trim(); //replace element with the element variable
+  const userInput = plantInput.value.trim(); 
   const listUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}`;
   if (userInput && userInput !== "") {
     axios
