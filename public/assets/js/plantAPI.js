@@ -45,6 +45,7 @@ axios
     console.log(sunlight);
     let poisonous = data.poisonous_to_pets;
     console.log(poisonous);
+    let image = data.default_image.regular_url;
   })
   .catch((error) => {
     console.log(error);
