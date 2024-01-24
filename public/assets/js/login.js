@@ -14,15 +14,13 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
+      // If successful, redirect the browser to the home page
       document.location.replace('/home');
     } else {
       alert(response.statusText);
     }
   }
 };
-
-
 
 document
   .querySelector('.login-form')
