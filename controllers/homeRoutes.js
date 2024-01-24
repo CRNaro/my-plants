@@ -31,6 +31,10 @@ router.get('/', async (req, res) => {
       res.render('login')
   );
 
+  router.get('/', async (req, res) =>
+  res.render('main')
+)
+
   router.get('/signup', async (req, res) => 
       res.render('signup')
   );
@@ -38,6 +42,7 @@ router.get('/', async (req, res) => {
   router.get('/logout', async (req, res) =>
     res.render('home')
   );
+
 
   //Display individual plant
   router.get('/plant/:id', async (req, res) => {
@@ -75,7 +80,6 @@ router.get('/', async (req, res) => {
     });
     res.status(201).json(plant);
 
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' })
@@ -98,7 +102,7 @@ router.get('/', async (req, res) => {
 });
 
   //Prevent access to page unless logged in
-  router.get('/profile', withAuth, async (req, res) => {
+  router.get('/', withAuth, async (req, res) => {
     try {
       // Find the logged in user based on the session ID
       const userData = await User.findByPk(req.session.id, {
@@ -108,7 +112,7 @@ router.get('/', async (req, res) => {
   
       const user = userData.get({ plain: true });
   
-      res.render('profile', {  
+      res.render('main', {  
         ...user,
         logged_in: true
       });
