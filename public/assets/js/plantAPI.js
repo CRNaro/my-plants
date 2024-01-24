@@ -53,8 +53,6 @@ axios
   });
 }
 
-getID();
-
 const plantData = {
   commonName: 'req.body.common_name',
   description: 'req.body.description',
