@@ -2,6 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const Schedule = require('./Schedule');
 const User = require('./User');
+require('sequelize');
 
 class Plant extends Model {}
 
@@ -17,7 +18,7 @@ Plant.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        description: {
+        descriptions: {
             type: DataTypes.STRING,
         },
         watering: {

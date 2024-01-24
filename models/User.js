@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const Plant = require("./Plant");
 const Schedule = require("./Schedule");
 
+
 // create our User model
 class User extends Model {
   // set up method to run on instance data (per user) to check password
