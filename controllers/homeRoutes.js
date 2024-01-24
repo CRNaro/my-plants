@@ -98,7 +98,7 @@ router.get('/', async (req, res) => {
 });
 
   //Prevent access to page unless logged in
-  router.get('/profile', withAuth, async (req, res) => {
+  router.get('/main', withAuth, async (req, res) => {
     try {
       // Find the logged in user based on the session ID
       const userData = await User.findByPk(req.session.id, {
@@ -108,7 +108,7 @@ router.get('/', async (req, res) => {
   
       const user = userData.get({ plain: true });
   
-      res.render('profile', {  
+      res.render('main', {  
         ...user,
         logged_in: true
       });
