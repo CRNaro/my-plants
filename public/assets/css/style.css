@@ -15,6 +15,8 @@ body{
     font-family: 'Times New Roman', Times, serif;
     font-size: 30px;
     background-color:var(--auqa);
+    background-image: url("../plant_background.jpg");
+    background-size: 100%;
 }
 a{
     color: var(--dark);
@@ -73,6 +75,14 @@ nav a:hover {
     align-items: center;
 }
 
+h1 {
+    color: yellow;
+}
+
+h3 {
+    color: yellow;
+}
+
 .btn-no-style {
 background:none;
 border:none;
@@ -101,11 +111,6 @@ img {
     padding: 10px 20px;
     font-weight: bold;
   }
-  
-body {
-    background-image: url("../plant_background.jpg");
-    background-size: 100%;
-}
 
   /* CARDS */
   .card {
