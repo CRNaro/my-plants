@@ -2,6 +2,7 @@ const axios = require("axios");
 require("dotenv").config();
 const plantInput = document.getElementById("user-input");
 const submitBtn = document.getElementById("submit-btn");
+const plantName = document.getElementById("plant-name");
 
 // Plant List to get the plant ID
 function getID() {
@@ -37,6 +38,7 @@ axios
   .then(function (data) {
     let commonName = data.common_name;
     console.log(commonName);
+    plantName.textContent = commonName;
     let description = data.description;
     console.log(description);
     let watering = data.watering;
