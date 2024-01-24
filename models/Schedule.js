@@ -31,18 +31,6 @@ Schedule.init(
                 key: 'id',
             },
         }, 
-<<<<<<< Updated upstream
-        water_date: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.NOW
-        },
-        watered: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
-        },
-=======
         // water_date: {
         //     type: DataTypes.DATE,
         //     allowNull: false,
@@ -52,7 +40,6 @@ Schedule.init(
         //     allowNull: false,
         //     defaultValue: false,
         // },
->>>>>>> Stashed changes
         
     },
     {
