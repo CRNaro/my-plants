@@ -18,6 +18,7 @@ body{
     background-image: url("../plant_background.jpg");
     background-size: 100%;
 }
+
 a{
     color: var(--dark);
     text-decoration:none

@@ -29,14 +29,17 @@ router.get('/', async (req, res) => {
 
   router.get('/login', async (req, res) => 
   
-      // Pass serialized data and session flag into template
       res.render('login')
   );
 
   router.get('/signup', async (req, res) => 
   
-      // Pass serialized data and session flag into template
       res.render('signup')
+  );
+
+  router.get('/logout', async (req, res) =>
+
+    res.render('home')
   );
 
   //Display individual plant
