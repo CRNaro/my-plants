@@ -1,5 +1,5 @@
 html{
-    background-color:var(--auqa);
+    background-color:var(--tertiary);
 }
 :root{
     --primary: #3d5852;
@@ -11,12 +11,22 @@ html{
     --error: rgb(228, 46, 1);
     --border-radius: 0.3rem;
 }
+
 body{
     font-family: 'Times New Roman', Times, serif;
     font-size: 30px;
-    background-color:var(--auqa);
-    background-image: url("../plant_background.jpg");
-    background-size: 100%;
+    background-color:var(--tertiary);
+    margin: 0;
+    padding: 0;
+    background-image: url('/assets/plant_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 a{
@@ -25,7 +35,7 @@ a{
 }
 
 a:visited{
-    color:inherit;
+    color: var(--quatrinary);
 }
 
 header{
@@ -35,18 +45,15 @@ header{
     color:var(--primary)
 }
 
+#text{
+  text-align: center;
+  width: 100%;
+}
+
 main{
     display: flex;
     flex-wrap: wrap;
     flex-grow: 2;
-}
-
-aside{
-    flex: 0;
-    background-color:var(--auqa);
-    padding: 75px;
-    text-align: left;
-    color: var(--quatrinary);
 }
 
 nav{
@@ -66,54 +73,7 @@ nav a:hover {
     background-color: var(--dark);
 }
 
-.grallery {
-    flex:4;
-    background-color: #e3e4e3;
-    padding: 45px;
-    display: flex;
-    flex-flow: wrap;
-    justify-content: center;
-    align-items: center;
-}
 
-h1 {
-    color: yellow;
-}
-
-h3 {
-    color: yellow;
-}
-
-.btn-no-style {
-background:none;
-border:none;
-padding:0;
-cursor: pointer;
-text-decoration:none;
-font-size: 100%;
-transition: color 0.1s;
-margin-left: 15px;
-}
-
-img {
-    max-width: 120%;
-    height: auto;
-}
-
-.painting {
-    width: 55%;
-    background-color: aliceblue;
-     box-shadow: 0 4px 8px 0;
-     margin-bottom: 25px;
-}
-
-.painting-details {
-    text-align: center;
-    padding: 10px 20px;
-    font-weight: bold;
-  }
-
-  /* CARDS */
   .card {
     margin: 20px;
     flex: 0 1 300px;
@@ -121,19 +81,6 @@ img {
     border-radius: 10px;
     background-color: var(--light);
     color: var(--dark);
-  }
-  
-  .login-card {
-    margin: 0 0 20px 0;
-    flex: 0 0 50%;
-    max-width: 50%;
-    padding: 5px;
-    border: 3px solid var(--dark);
-    border-radius: var(--border-radius);
-    border-style: double;
-    border-width: thick;
-    background-color: #577a7c;
-    color: var(--light);
   }
   
   .card header {
@@ -146,28 +93,16 @@ img {
     border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
   }
   
-  .card-body {
-    font-size: 1.4rem;
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .gallery-name {
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 5px var(--secondary);
-    border: 10px groove var(--light);
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-right: 100px;
-    padding-left: 100px;
-  }
-  
-  /* LAYOUT */
+
   .container {
     display: flex;
     flex-flow: column wrap;
     align-content: flex-start;
     align-items: center;
+    background-color: white;
+    text-align: center;
+    border-radius: 30px;
+    padding: 20px;
+    box-sizing: border-box;
   }
   
