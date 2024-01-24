@@ -102,6 +102,11 @@ img {
     font-weight: bold;
   }
   
+body {
+    background-image: url("../plant_background.jpg");
+    background-size: 100%;
+}
+
   /* CARDS */
   .card {
     margin: 20px;
