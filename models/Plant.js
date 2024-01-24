@@ -18,7 +18,7 @@ Plant.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        descriptions: {
+        description: {
             type: DataTypes.STRING,
         },
         watering: {

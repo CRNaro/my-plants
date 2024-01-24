@@ -108,7 +108,7 @@ router.get('/', async (req, res) => {
   
       const user = userData.get({ plain: true });
   
-      res.render('home', {   //home route or profile page?
+      res.render('profile', {  
         ...user,
         logged_in: true
       });
