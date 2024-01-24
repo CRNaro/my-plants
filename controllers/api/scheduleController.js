@@ -1,6 +1,5 @@
 // This will be the controller for the schedule and will handle the various HTTP requests for managing the schedule
-const Schedule = require("../../models/Schedule");
-const Plant = require("../../models/Plant");
+const { Plant, Schedule } = require("../../models");
 const router = require('express').Router();
 
 // GET route to retrieve all the schedules with associated plant and user

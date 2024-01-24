@@ -4,7 +4,7 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
 const helpers = require("./utils/helpers");
-
+//express.static
 require("dotenv").config();
 
 const sequelize = require("./config/connection");
@@ -33,6 +33,8 @@ const sess = {
 
 app.use(session(sess));
 
+
+
 // Static files cache control
 const oneDay = 1000 * 60 * 60 * 24; // 24 hours
 app.use(express.static(path.join(__dirname, "public"), { maxAge: oneDay }));
@@ -42,7 +44,7 @@ app.set("view engine", "handlebars");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
