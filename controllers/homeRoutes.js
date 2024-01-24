@@ -27,6 +27,18 @@ router.get('/', async (req, res) => {
     }
   });
 
+  router.get('/login', async (req, res) => 
+  
+      // Pass serialized data and session flag into template
+      res.render('login')
+  );
+
+  router.get('/signup', async (req, res) => 
+  
+      // Pass serialized data and session flag into template
+      res.render('signup')
+  );
+
   //Display individual plant
   router.get('/plant/:id', async (req, res) => {
     try {
@@ -96,7 +108,7 @@ router.get('/', async (req, res) => {
   
       const user = userData.get({ plain: true });
   
-      res.render('home', {
+      res.render('home', {   //home route or profile page?
         ...user,
         logged_in: true
       });

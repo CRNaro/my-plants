@@ -19,11 +19,11 @@
         <!-- Conditionally render login or logout links -->
         {{#if logged_in}}
         <a href="../partials/plantpage.handlebars">My Plants</a>
-        <a href="../home.handlebars">Logout</a>
+        <a href="/logout">Logout</a>
         {{else}}
-        <a href="../login.handlebars">Login</a>
+        <a href="/login">Login</a>
         {{/if}}
-        <a href="../signup.handlebars">Sign-Up</a>
+        <a href="/signup">Sign-Up</a>
       </nav>
     </header>
     <main class="container container-fluid mt-5">
