@@ -11,36 +11,59 @@ const petPoison = document.getElementById("poison");
 const plantImage = document.getElementById("image");
 
 // Plant List to get the plant ID
-function getID() {
-  const userInput = plantInput.value.trim(); 
-  const listUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}`;
-  if (userInput && userInput !== "") {
-    axios
-      .get(listUrl)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-        return response.data;
-      })
-      .then(function (data) {
-        let id = data.id;
-        console.log(id);
-        getDetails(id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+// function getID() {
+//   const userInput = plantInput.value.trim(); 
+//   const listUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}`;
+//   if (userInput && userInput !== "") {
+//     axios
+//       .get(listUrl)
+//       .then((response) => {
+//         console.log(JSON.stringify(response.data));
+//         return response.data;
+//       })
+//       .then(function (data) {
+//         let id = data.id;
+//         console.log(id);
+//         getDetails(id);
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+// };
+
+function getId() {
+  var requestOptions = {
+    method: '',
+    redirect: 'follow'
+};
+const userInput = plantInput.value.trim();
+if (userInput && userInput !== "") {
+fetch(`https://perenual.com/api/species-list?key=${process.env.API_KEY}`, requestOptions)
+  .then(response => response.text())
+  return response.data
+  // .then(result => console.log(result))
+  .then (function (data) { 
+    let id = data.id;
+    console.log(id);
+    getDetails(id)
+  })
+  .catch(error => console.log('error', error));
+}
+}
+
+
+
+function getDetails(id) {
+var requestOptions = {
+  method: '',
+  redirect: 'follow'
 };
 
-// Plant Detail to get plant info from the plant ID
-function getDetails(id) {
-  const detailUrl = `https://perenual.com/api/species/details/${id}?key=${process.env.API_KEY}`;
-axios
-  .get(detailUrl)
-  .then((response) => {
-    console.log(JSON.stringify(response.data));
-    return response.data;
-  })
+fetch(`https://perenual.com/api/species/details/${id}?key=${process.env.API_KEY}`, requestOptions)
+  .then(response => response.text())
+  return response.data
+  // .then(result => console.log(result))
   .then(function (data) {
     let commonName = data.common_name;
     console.log(commonName);
@@ -66,10 +89,47 @@ axios
     console.log(image);
     plantImage.src = image;
   })
-  .catch((error) => {
-    console.log(error);
-  });
+  .catch(error => console.log('error', error));
 }
+
+// Plant Detail to get plant info from the plant ID
+// function getDetails(id) {
+//   const detailUrl = `https://perenual.com/api/species/details/${id}?key=${process.env.API_KEY}`;
+// axios
+//   .get(detailUrl)
+//   .then((response) => {
+//     console.log(JSON.stringify(response.data));
+//     return response.data;
+//   })
+//   .then(function (data) {
+//     let commonName = data.common_name;
+//     console.log(commonName);
+//     plantName.textContent = commonName;
+//     plantInfo.textContent = plantName.textContent;
+//     let description = data.description;
+//     console.log(description);
+//     plantDescription.textContent = description;
+//     plantInfo.textContent = plantDescription.textContent;
+//     let watering = data.watering;
+//     console.log(watering);
+//     plantWater.textContent = watering;
+//     plantInfo.textContent = plantWater.textContent;
+//     let sunlight = data.sunlight;
+//     console.log(sunlight);
+//     plantSunlight.textContent = sunlight;
+//     plantInfo.textContent = plantSunlight.textContent;
+//     let poisonous = data.poisonous_to_pets;
+//     console.log(poisonous);
+//     petPoison.textContent = "Poisonous to Pets:" + poisonous;
+//     plantInfo.textContent = petPoison.textContent;
+//     let image = data.default_image.regular_url
+//     console.log(image);
+//     plantImage.src = image;
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+// }
 
 const plantData = {
   commonName: 'req.body.common_name',
