@@ -1,3 +1,48 @@
+const router = require('express').Router();
+require('dotenv').config();
+const API_KEY = process.env.API_KEY;
+const Plant = require('../../models/Plant');
+const idURL = `https://perenual.com/api/species-list?key=${API_KEY}`
+const detailURL = `https://perenual.com/api/species/details/${id}?key=${API_KEY}`
+
+router.get('/', async (req, res) => {
+  console.log('hi', req.body)
+  try {
+    const plantData = await Plant.create({
+      common_name: req.body.common_name,
+      description: req.body.description,
+      watering: req.body.watering,
+      sunlight: req.body.sunlight,
+      poisonous_to_pets: req.body.poisonous_to_pets,
+      image_url: req.body.image_url,
+    });
+    res.status(200).json(plantData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const axios = require("axios");
 require("dotenv").config();
 const plantInput = document.getElementById("user-input");
@@ -9,10 +54,11 @@ const plantWater = document.getElementById("watering");
 const plantSunlight = document.getElementById("sun");
 const petPoison = document.getElementById("poison");
 const plantImage = document.getElementById("image");
+// fetch
 
 // Plant List to get the plant ID
 function getID() {
-  const userInput = plantInput.value.trim(); 
+  const userInput = plantInput.value.trim(); //backend doesn't know what this is.... User Input should be const userInput = req.body.plantInput
   const listUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&plant=${userInput}`; // added the &plant=${userInput} to the end of the listUrl -CRN
   if (userInput && userInput !== "") {
     axios
