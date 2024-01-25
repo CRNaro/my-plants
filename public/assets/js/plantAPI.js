@@ -32,7 +32,7 @@ const plantImage = document.getElementById("image");
 //   };
 // };
 
-function getId() {
+function getID() {
   var requestOptions = {
     method: '',
     redirect: 'follow'
