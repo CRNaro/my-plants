@@ -13,13 +13,16 @@ const plantImage = document.getElementById("image");
 // Plant List to get the plant ID
 function getID() {
   const userInput = plantInput.value.trim(); 
-  const listUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}`;
+  const listUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&plant=${userInput}`; // added the &plant=${userInput} to the end of the listUrl -CRN
   if (userInput && userInput !== "") {
     axios
       .get(listUrl)
       .then((response) => {
         console.log(JSON.stringify(response.data));
-        return response.data;
+        let id = response.data.id;  // added .data to response -CRN
+        console.log(id);  // added  -CRN
+        getDetails(id);     // added -CRN
+        //return response.data;
       })
       .then(function (data) {
         let id = data.id;
@@ -95,5 +98,8 @@ fetch('/api/addPlant', {
   console.error('Error:', error)
 })
 
-submitBtn.addEventListener("click", getID);
+submitBtn.addEventListener("click", function(event) {         
+  event.preventDefault();   // added to prevent page from reloading
+  getID(); // took out of event listener ()
+});
 
