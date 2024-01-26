@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const { sendEmail } = require('../../controllers/nodemailerConfig');
 
 //Create New User
 router.post('/', async (req, res) => {
@@ -9,9 +10,26 @@ router.post('/', async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    req.session.save(() => {
+
+
+    req.session.save(async () => {
       req.session.logged_in = true;
-      res.redirect('/')
+
+      // send email to user
+      const welcomeMessage = `Welcome to I Wet My Plants, ${userData.name}!`;
+      const welcomeText = `Thank you ${req.body.name}, for signing up for I Wet My Plants! 
+      We hope you enjoy using our app to keep track of your plants' 
+      watering schedules. Happy growing!`;
+
+      try { 
+        await sendEmail(req.body.email, welcomeMessage, welcomeText);
+        console.log('Email sent successfully');
+      } catch (emailError) {
+        console.error('Error sending email: ', emailError);
+      }
+
+      res.status(200).json(userData);
+
     });
   } catch (err) {
     res.status(500).json(err)
