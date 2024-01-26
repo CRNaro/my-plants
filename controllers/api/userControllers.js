@@ -1,13 +1,17 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const bcrypt = require('bcrypt');
+const rounds = 10
 
 //Create New User
 router.post('/', async (req, res) => {
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, rounds);
+    const hashedEmail = await bcrypt.hash(req.body.email);
     const userData = await User.create({
       name: req.body.name,
-      email: req.body.email,
-      password: req.body.password, 
+      email: hashedEmail,
+      password: hashedPassword, 
     });
 
     req.session.save(() => {
