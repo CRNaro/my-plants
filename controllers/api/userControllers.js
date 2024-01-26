@@ -1,26 +1,19 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-const bcrypt = require('bcrypt');
-const rounds = 10
 
 //Create New User
 router.post('/', async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, rounds);
-    const hashedEmail = await bcrypt.hash(req.body.email);
     const userData = await User.create({
       name: req.body.name,
-      email: hashedEmail,
-      password: hashedPassword, 
+      email: req.body.email,
+      password: req.body.password,
     });
-
     req.session.save(() => {
       req.session.logged_in = true;
-
-      res.status(200).json(userData);
+      res.redirect('/')
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err)
   }
 });
