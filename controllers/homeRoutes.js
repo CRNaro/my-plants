@@ -31,13 +31,13 @@ router.get('/', async (req, res) => {
       res.render('login')
   );
 
-  router.get('/', async (req, res) =>
-  res.render('main')
-)
-
   router.get('/signup', async (req, res) => 
       res.render('signup')
   );
+
+  router.get('/', async (req, res) =>
+  res.render('home')
+)
 
   router.get('/logout', async (req, res) =>
     res.render('home')
