@@ -31,13 +31,13 @@ router.get('/', async (req, res) => {
       res.render('login')
   );
 
-//   router.get('/myPlants', async (req, res) =>  //only if we display on separate page
-//   res.render('myPlants')
-// )
-
   router.get('/signup', async (req, res) => 
       res.render('signup')
   );
+
+  router.get('/', async (req, res) =>
+  res.render('home')
+)
 
   router.get('/logout', async (req, res) =>
     res.render('home')
