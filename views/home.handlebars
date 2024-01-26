@@ -8,7 +8,7 @@
           <form class="form-inline">
             <input id="user-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button id="submit-btn"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add to My List</button>
+            <button id="add-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add to My List</button>
           </form>
         </nav>
       </div>
@@ -16,11 +16,11 @@
         My Plant List
         <!-- Will have to add links to plants that were added -->
         <div class="plant-info">
-        <h2 id="plant-name"></h2>
-        <p id="description"></p>
-        <p id="watering"></p>
-        <p id="sun"></p>
-        <p id="poison"></p>
+        <h2 id="plant-name">{{commonName}}</h2>
+        <p id="description">{{description}}</p>
+        <p id="watering">{{watering}}</p>
+        <p id="sun">{{sunlight}}</p>
+        <p id="poison">{{poisonous}}</p>
         <img id="image" />
         </div>
       </div>
@@ -31,3 +31,5 @@
     <h3>Login or Signup to Begin</h3>
 </div>
 {{/if}}
+
+<script src="/assets/js/plant.js"></script>
