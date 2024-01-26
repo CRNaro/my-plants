@@ -13,7 +13,8 @@ router.post('/', async (req, res) => {
 
     req.session.save(async () => {
       req.session.logged_in = true;
-
+      res.redirect('/dashboard')  // accidentally took this out during the nodemailer build
+      
       // send email to user
       const welcomeMessage = `Welcome to I Wet My Plants, ${userData.name}!`;
       const welcomeText = `Thank you ${req.body.name}, for signing up for I Wet My Plants! 
