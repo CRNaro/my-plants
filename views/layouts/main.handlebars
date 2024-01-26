@@ -12,14 +12,13 @@
 
 <body>
   <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
+    <header class="display-flex justify-space-between align-center p-2 vertical">
       <h1>
-        Wet My Plants
+        <a href="/main">Wet My Plants</a>
       </h1>
       <nav>
         <!-- Conditionally render login or logout links -->
         {{#if logged_in}}
-        <a href="../partials/plantpage.handlebars">My Plants</a>
         <a href="/logout">Logout</a>
         {{else}}
         <a href="/login">Login</a>

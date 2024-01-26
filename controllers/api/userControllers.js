@@ -8,8 +8,9 @@ router.post('/', async (req, res) => {
     const userData = await User.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password, 
+      password: req.body.password,
     });
+
 
     req.session.save(async () => {
       req.session.logged_in = true;
@@ -28,9 +29,9 @@ router.post('/', async (req, res) => {
       }
 
       res.status(200).json(userData);
+
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err)
   }
 });

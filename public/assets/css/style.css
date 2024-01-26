@@ -12,17 +12,6 @@ html{
     --border-radius: 0.3rem;
 }
 
-.vertical {
-  position: absolute;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 20px;
-  padding: 20px;
-  background-color: #e74c3c;
-  color: white;
-}
-
 body{
     font-family: 'Times New Roman', Times, serif;
     font-size: 30px;
