@@ -1,23 +1,40 @@
 // const plantInput = document.getElementById("user-input").value;
 const plantInfo = document.getElementsByClassName("plant-info");
 
-async function getPlant(event) {
+
+ async function getPlant(event) {
     event.preventDefault();
     console.log("Button clicked")
     const plantName = document.getElementById("user-input").value;
     console.log(plantName);
-    const response = await fetch('/api/getPlant', {
-        method: 'POST',
-        body: JSON.stringify({ plantName }),
-        headers: { 'Content-Type': 'application/json' },
-      });
+    const plantDataURL = `/api/plant?plantName=${plantName}` //added crn
+    const response = await fetch(plantDataURL)
+    const data = await response.json()
+
+    // fetch(plantDataURL)
+    // .then(function (response) {
+    //   if (response.ok) {
+    //     response.json().then(function (data) {
+    //       console.log("Data!!!!", data);
+    //     });
+    //   } else {
+    //     alert('Error: ' + response.statusText);
+    //   }
+    // })
+    // .catch(function (error) {
+    //   alert('Unable to connect to GitHub');
+    // });
+//};
   
       if (response.ok) {
-        // If successful, redirect the browser to the home page
-        document.location.replace('/home');
+       console.log("RESPONSE!!!!!!", data)
+        //console.log("API Data!!!", response.json())
+        //If successful, redirect the browser to the home page
+        //document.location.replace('/home');
+       
       } else {
-        alert(response.statusText);
-      }
+       alert(response.statusText);
+    }
     // const common_name = document.getElementById("plant-name");
     // const description = document.getElementById("description");
     // const watering = document.getElementById("watering");
@@ -57,9 +74,9 @@ async function getPlant(event) {
     //     document.location.replace('/');
     // } else {
     //     alert('Failed to get plant');
-    // }
+    }
     
-}
+
 
 async function addPlant(event) {
     event.preventDefault();
