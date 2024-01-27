@@ -10,7 +10,7 @@ const API_KEY = process.env.API_KEY;
 
 router.post("/", async (req, res) => {
   const plantName = req.body.plantName;
-  const listUrl = `https://perenual.com/api/species-list?key=${API_KEY}&plant=${plantName}`;
+  const listUrl = `https://perenual.com/api/species-list?key=${API_KEY}&q=${plantName}`;
   let plantID;
   axios
     .get(listUrl)
