@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 
     req.session.save(async () => {
       req.session.logged_in = true;
-      res.redirect('/dashboard')  // accidentally took this out during the nodemailer build
+      //res.redirect('/')  // accidentally took this out during the nodemailer build
       
       // send email to user
       const welcomeMessage = `Welcome to I Wet My Plants, ${userData.name}!`;
@@ -57,12 +57,13 @@ router.post('/login', async (req, res) => {
               .json({ message: 'Incorrect email or password, please try again' });
             return;
           }
+          req.session.user_id = userData.id;
+          req.session.logged_in = true;
           req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.logged_in = true;
-            
             res.redirect('/')
-          });
+            //req.session.user_id = userData.id;
+            //req.session.logged_in = true;
+        });
       
         } catch (err) {
           res.status(500).json(err);
