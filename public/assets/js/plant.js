@@ -1,6 +1,9 @@
 // const plantInput = document.getElementById("user-input").value;
 const plantInfo = document.getElementsByClassName("plant-info");
 
+let myList = document.getElementById("plant_info")
+myList = [];
+
 
  async function getPlant(event) {
     event.preventDefault();
@@ -84,8 +87,34 @@ function renderPlants(plants) {
   `;
 //     plantInfoContainer.appendChild(plantInfo);
 //     console.log("Plants please!!!", plantInfo);
+
+addButton.addEventListener('click', addToMyList);
   });
  };
+
+ function addToMyList(event) {
+  const plantCard = event.currentTarget.parentNode;
+  const plantName = plantCard.querySelector('h3').textContent;
+  const plantImgSrc = plantCard.querySelector('img').src;
+  const plantData = {
+    name: plantName,
+    imageSrc: plantImgSrc,
+  };
+
+  const listItem = document.createElement("li");
+  listItem.innerHTML = `
+  <h3>${plantData.name}</h3>
+  <img src="${plantData.imageSrc}" alt="Image of ${plantData.name}">
+  `;
+
+  const myPlantList = document.getElementById("plant_info");
+  myPlantList.appendChild(listItem);
+
+  myList.push(plantData);
+  let userList = document.createElement("h3")
+  userList.append(myList)
+
+ }
 async function searchPlants(event) {
   event.preventDefault();
 

@@ -16,15 +16,15 @@
       <div class="col-6">
         My Plant List
         <!-- Will have to add links to plants that were added -->
-       <div class="plant-info">
-        <h2 id="plant-name">{{commonName}}</h2>
-        <p id="description">{{description}}</p>
-        <p id="watering">{{watering}}</p>
-        <p id="sun">{{sunlight}}</p>
-        <p id="poison">{{poisonous}}</p>
-        <img id="image" />
-        </div>
-      </div> 
+        <ul class="plant-info" id="plant_info">
+          <h2 id="plant-name user_plant_info">{{commonName}}</h2>
+          <p id="description">{{description}}</p>
+          <p id="watering">{{watering}}</p>
+          <p id="sun">{{sunlight}}</p>
+          <p id="poison">{{poisonous}}</p>
+          <img id="image" />
+        </ul>
+      </div>
       <!-- added to give user search results -->
      <div id="search-results" class="search-results"></div> 
 {{else}}
