@@ -121,3 +121,32 @@ nav a:hover {
   .home {
     transform: translateX(100%);
   }
+
+  /* added for plant list - CRN */
+
+
+  .search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.plant-card {
+    border: 1px solid #dddddd;
+    padding: 10px;
+    margin: 10px;
+    width: calc(100% / 5 - 20px); /* Adjust the width as needed, this will fit 5 cards in a row */
+    text-align: center;
+}
+
+.plant-card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.plant-card button {
+    cursor: pointer;
+}
