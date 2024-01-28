@@ -49,4 +49,73 @@ router.get('/', async (req, res) => {
     }
   });
 
+
+module.exports = scheduleController;
+
+
+
+// This section is for the watering timer // 
+
+//watering fequency //
+var wateringCategories = {
+  frequently: "Frequntly",
+  moderate: "moderate",
+  rarely: "Rarely"
+};
+
+// watering intervals in days for each category //
+ var wateringIntervals = {
+  frequently: 1, 
+  moderate: 3,
+  rarely : 7
+ };
+
+ //plant api data //
+ async function fetchplantData() {  
+try{
+  var response = await fetch ("put in the api url ")
+ var plantdata = await response.json() ;
+ return plantdata;
+} catch (error) {
+  console.error (" Error fetching plant data ", error );
+  return [];
+}
+
+}
+// catgorize plants based on watering needs //
+async function catgorizePlants() {
+  var plantdata = await fetchplantData();
+
+  const catgorizePlants = plantdata.map(plant=> {
+    var wateringNeeds = plant.wateringNeeds.toLowercase();
+    
+    return {
+      ...Plant,
+      category: wateringCategories[wateringNeeds]
+    };
+  });
+}
+// This function shows the pop up notification//
+function showNotification(plantName, wateringCategory) {
+  var notificationMessage ="its time to water your ${plantName}! (${wateringCategory} watering)";
+  alert(notificationMessage);
+}
+
+//This function schedule notification by the palnt categories //
+function scheduleNotifications(categorizedPlants) {
+  categorizedPlants.array.forEach(element => {
+    var { name,category } = plant;
+    var wateringIntervals = wateringIntervals[category];
+
+    setInterval( () => {
+      showNotification( name, category);
+    }, wateringIntervals * 20 * 60 * 60 * 1000); // convert days to millisecond 
+  });
+}
+// Call the categotizeation and notification scheduling functions//
+categorizedPlants(). then( categorizedPlants => {
+  scheduleNotifications( categorizedPlants);
+});
+
 module.exports = router;
+
