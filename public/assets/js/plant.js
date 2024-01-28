@@ -19,7 +19,7 @@ const plantInfo = document.getElementsByClassName("plant-info");
       } else {
        alert(response.statusText);
     }
-   
+   //renderPlants();
     }
     
 
@@ -49,6 +49,7 @@ async function addPlant(event) {
 // Render the search results to the page
 function renderPlants(plants) {
   const searchResultsContainer = document.getElementById("search-results");
+  const plantInfoContainer = document.getElementById("plant-info");
   searchResultsContainer.innerHTML = "";
   plants.forEach(plant => {
     const plantCard = document.createElement("div");
@@ -58,7 +59,7 @@ function renderPlants(plants) {
     plantName.textContent = plant.common_name;
 
     const plantImage = document.createElement("img");
-    plantImage.src = plant.image_url;
+    plantImage.src = plant.default_image?.regular_url || "default_image_url"
     //plant.default_image.regular_url || "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",  // need to set the image
     plantImage.alt = `Image of ${plant.common_name}`;
 
@@ -66,21 +67,21 @@ function renderPlants(plants) {
     addButton.textContent = "Add to My List";
     addButton.dataset.plantId = plant.id; // Assign the plant's id to the button's data attribute
     
-    addButton.addEventListener("click", savePlantToAccount);
+    //addButton.addEventListener("click", savePlantToAccount);
 
     plantCard.append(plantName, plantImage, addButton);
 
     searchResultsContainer.append(plantCard);
 
     const plantInfo = document.createElement("div");
-    plantInfo.className = "plant-info";
+    plantInfo.className = "search-results";  //not plant-info
     plantInfo.innerHTML = `
     <h2 id="plant-name">${plant.common_name}</h2>
     <p id="description">${plant.description}</p>
     <p id="watering">${plant.watering}</p>
     <p id="sun">${plant.sunlight}</p>
     <p id="poison">${plant.poisonous_to_pets}</p>
-    <img id="image" src=${plant.image_url} alt="Image of ${plant.common_name}">
+    <img id="image" src=${plant.default_image.regular_url} alt="Image of ${plant.common_name}">
     `;
     plantInfoContainer.appendChild(plantInfo);
     //console.log("Plants please!!!", plantInfo);
@@ -93,7 +94,7 @@ async function searchPlants(event) {
   const searchURL = `/api/plant?plantName=${plantName}`
   
   try {
-  const response = await fetch(plantDataURL);  //plantDataURL or searchURL?
+  const response = await fetch(searchURL);  //plantDataURL or searchURL?
   const json = await response.json();
 
   if (response.ok) {
@@ -108,7 +109,9 @@ async function searchPlants(event) {
 }
 
 const submitBtn = document.getElementById("submit-btn");
-submitBtn.addEventListener('click', getPlant, searchPlants); //add searchPlants
+submitBtn.addEventListener('click', getPlant); 
+submitBtn.addEventListener('click', searchPlants);
 
 const addBtn = document.getElementById("add-btn");
 addBtn.addEventListener('click', addPlant);
+
