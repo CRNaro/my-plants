@@ -66,7 +66,7 @@ function renderPlants(plants) {
    plantImage.alt = `Image of ${plant.common_name}`;
   console.log("IMAGE!!!!", plantImage)
     const addButton = document.createElement("button");
-//     addButton.textContent = "Add to My List";
+    addButton.textContent = "Add to My List";
 //     addButton.dataset.plantId = plant.id; // Assign the plant's id to the button's data attribute
     
     //addButton.addEventListener("click", savePlantToAccount);
@@ -79,7 +79,7 @@ function renderPlants(plants) {
 //     plantInfo.className = "search-results";  //not plant-info
    plantInfo.innerHTML = `
      <h2 id="plant-name">${plant.common_name}</h2>
-
+     <p id="description">${plant.description}</p>
     <img id="image" src=${plant.default_image.regular_url} alt="Image of ${plant.common_name}">
   `;
 //     plantInfoContainer.appendChild(plantInfo);
@@ -115,7 +115,7 @@ submitBtn.addEventListener('click', searchPlants);
 const addBtn = document.getElementById("add-btn");
 addBtn.addEventListener('click', addPlant);
 
-//     <p id="description">${plant.description}</p>
+
 //     <p id="watering">${plant.watering}</p>
 //     <p id="sun">${plant.sunlight}</p>
 //     <p id="poison">${plant.poisonous_to_pets}</p>

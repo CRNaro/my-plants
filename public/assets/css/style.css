@@ -127,7 +127,8 @@ nav a:hover {
 
   .search-results {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
     margin-top: 20px;
 }
@@ -136,8 +137,9 @@ nav a:hover {
     border: 1px solid #dddddd;
     padding: 10px;
     margin: 10px;
-    width: calc(100% / 5 - 20px); /* Adjust the width as needed, this will fit 5 cards in a row */
+    width: 20%; /* calc(100% / 5 - 20px) Adjust the width as needed, this will fit 5 cards in a row */
     text-align: center;
+    border-radius: 10px;
 }
 
 .plant-card img {
@@ -149,4 +151,6 @@ nav a:hover {
 
 .plant-card button {
     cursor: pointer;
+    padding: 10px;
+    font-size: small;
 }
