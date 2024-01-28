@@ -1,22 +1,38 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const { sendEmail } = require('../../controllers/nodemailerConfig');
 
 //Create New User
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create({
-      username: req.body.username,
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
 
-    req.session.save(() => {
+
+    req.session.save(async () => {
       req.session.logged_in = true;
+      //res.redirect('/')  // accidentally took this out during the nodemailer build
+      
+      // send email to user
+      const welcomeMessage = `Welcome to I Wet My Plants, ${userData.name}!`;
+      const welcomeText = `Thank you ${req.body.name}, for signing up for I Wet My Plants! 
+      We hope you enjoy using our app to keep track of your plants' 
+      watering schedules. Happy growing!`;
+
+      try { 
+        await sendEmail(req.body.email, welcomeMessage, welcomeText);
+        console.log('Email sent successfully');
+      } catch (emailError) {
+        console.error('Error sending email: ', emailError);
+      }
 
       res.status(200).json(userData);
+
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err)
   }
 });
@@ -41,12 +57,13 @@ router.post('/login', async (req, res) => {
               .json({ message: 'Incorrect email or password, please try again' });
             return;
           }
+          req.session.user_id = userData.id;
+          req.session.logged_in = true;
           req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.logged_in = true;
-            
-            res.json({ user: userData, message: 'You are now logged in!' });
-          });
+            res.redirect('/')
+            //req.session.user_id = userData.id;
+            //req.session.logged_in = true;
+        });
       
         } catch (err) {
           res.status(500).json(err);
@@ -64,4 +81,6 @@ router.post('/login', async (req, res) => {
             }
           });
           
-          module.exports = router;
+            module.exports = router;
+
+            //

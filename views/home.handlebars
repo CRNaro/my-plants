@@ -1,16 +1,38 @@
+<!--Conditionally render what the user sees on the main page based if they are logged in or logged out -->
+{{#if logged_in}}
 <h2>My Plants</h2>
     <div class="row justify-content-around">
       <div class="col-6">
         Plant Search
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" id="text">
           <form class="form-inline">
             <input id="user-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button id="submit-btn"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add to My List</button>
+            <button id="add-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add to My List</button>
           </form>
         </nav>
       </div>
       <div class="col-6">
         My Plant List
         <!-- Will have to add links to plants that were added -->
-      </div>
+       <div class="plant-info">
+        <h2 id="plant-name">{{commonName}}</h2>
+        <p id="description">{{description}}</p>
+        <p id="watering">{{watering}}</p>
+        <p id="sun">{{sunlight}}</p>
+        <p id="poison">{{poisonous}}</p>
+        <img id="image" />
+        </div>
+      </div> 
+      <!-- added to give user search results -->
+     <div id="search-results" class="search-results"></div> 
+{{else}}
+<div id="text">
+  <h1>Welcome to Wet My Plants!</h1>
+    <h3>The website where you can get information on all your favorite houseplants!</h3>
+    <h3>Login or Signup to Begin</h3>
+</div>
+{{/if}}
+<script src="/assets/js/anime.js"></script>
+
+<script src="/assets/js/plant.js"></script>

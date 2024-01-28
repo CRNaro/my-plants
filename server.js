@@ -4,7 +4,7 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
 const helpers = require("./utils/helpers");
-
+//express.static
 require("dotenv").config();
 
 const sequelize = require("./config/connection");
@@ -15,6 +15,8 @@ const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create({ helpers });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const sess = {
   secret: process.env.SECRET, // Ensure this is set in your .env file
@@ -33,6 +35,8 @@ const sess = {
 
 app.use(session(sess));
 
+
+
 // Static files cache control
 const oneDay = 1000 * 60 * 60 * 24; // 24 hours
 app.use(express.static(path.join(__dirname, "public"), { maxAge: oneDay }));
@@ -40,16 +44,22 @@ app.use(express.static(path.join(__dirname, "public"), { maxAge: oneDay }));
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+app.get('./assets/css', (req, res) => {
+  res.type('text/css');
+});
 
-app.use((err, req, res, next) => {
+const middleware = (err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
-});
+  next();
+}
+
+app.use(middleware)
 
 
 sequelize

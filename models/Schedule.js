@@ -1,8 +1,9 @@
 // This is for our water schedule for the users chosen plants
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../config/connection');
 const User = require('./User');
 const Plant = require('./Plant');
+
 
 class Schedule extends Model {}
 
@@ -30,15 +31,15 @@ Schedule.init(
                 key: 'id',
             },
         }, 
-        water_date: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        watered: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
-        },
+        // water_date: {
+        //     type: DataTypes.DATE,
+        //     allowNull: false,
+        // },
+        // watered: {
+        //     type: DataTypes.BOOLEAN,
+        //     allowNull: false,
+        //     defaultValue: false,
+        // },
         
     },
     {
