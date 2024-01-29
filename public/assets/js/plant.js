@@ -56,16 +56,22 @@ function renderPlants(plants) {
   const searchResultsContainer = document.getElementById("search-results");
   //   const plantInfoContainer = document.getElementById("plant-info");
   searchResultsContainer.innerHTML = "";
-  return plants.map((plant) => {
-    console.log("Hello Plants", plant.common_name);
-    const plantCard = document.createElement("div");
+
+  return plants.map(plant => {
+
+  const plantCard = document.createElement("div");
     plantCard.className = "plant-card";
     // //console.log("plants!?!?!", renderPlants)
     const plantName = document.createElement("h3");
     plantName.textContent = plant.common_name;
+    let stringPlantWater = plant.watering || "Not specified";
+    let stringPlantSun = plant.sunlight[0] || "Not specified";
+
+    plantCard.dataset.watering = stringPlantWater;
+    plantCard.dataset.sunlight = stringPlantSun;
 
     const plantImage = document.createElement("img");
-    plantImage.src = plant.default_image.medium_url || "default_image_url";
+     plantImage.src = plant.default_image.medium_url || "default_image_url"
     //plant.default_image.medium_url || "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",  // need to set the image
     plantImage.alt = `Image of ${plant.common_name}`;
     console.log("IMAGE!!!!", plantImage);
@@ -75,7 +81,8 @@ function renderPlants(plants) {
 
     //addButton.addEventListener("click", savePlantToAccount);
 
-    plantCard.append(plantName, plantImage, addButton); // plantImage, addButton
+    plantCard.append(plantName, document.createTextNode(`Watering: ${stringPlantWater} Sunlight: ${stringPlantSun}`), plantImage, addButton);
+
 
     searchResultsContainer.append(plantCard);
 
@@ -83,8 +90,11 @@ function renderPlants(plants) {
     //     plantInfo.className = "search-results";  //not plant-info
     plantInfo.innerHTML = `
      <h2 id="plant-name">${plant.common_name}</h2>
+     <p> id="plantWater">${stringPlantWater}</p>
+     <p> id="plantSun">${stringPlantSun}</p>
+
      <p id="description">${plant.description}</p>
-    <img id="image" src=${plant.default_image.small_url} alt="Image of ${plant.common_name}">
+    <img id="image" src=${plant.default_image.medium_url} alt="Image of ${plant.common_name}">
   `;
     //     plantInfoContainer.appendChild(plantInfo);
     //     console.log("Plants please!!!", plantInfo);
@@ -97,15 +107,23 @@ function addToMyList(event) {
   const plantCard = event.currentTarget.parentNode;
   const plantName = plantCard.querySelector("h3").textContent;
   const plantImgSrc = plantCard.querySelector("img").src;
+
+  const wateringInfo = plantCard.dataset.watering || "Not specified";
+  const sunglightInfo = plantCard.dataset.sunlight || "Not specified";
+
   const plantData = {
     name: plantName,
     imageSrc: plantImgSrc,
+    watering: wateringInfo,
+    sunlight: sunglightInfo,
   };
 
   const listItem = document.createElement("li");
   listItem.innerHTML = `
   <h3>${plantData.name}</h3>
-  <img class="my-plant-list" src="${plantData.imageSrc}" alt="Image of ${plantData.name}">
+  <p>Watering: ${plantData.watering}</p>
+  <p>Sunlight: ${plantData.sunlight}</p>
+  <img src="${plantData.imageSrc}" alt="Image of ${plantData.name}">
   `;
 
   const myPlantList = document.getElementById("plant_info");
