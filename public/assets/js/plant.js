@@ -87,6 +87,9 @@ function renderPlants(plants) {
      <h2 id="plant-name">${plant.common_name}</h2>
      <p> id="plantWater">${stringPlantWater}</p>
      <p> id="plantSun">${stringPlantSun}</p>
+
+     <p id="description">${plant.description}</p>
+
     <img id="image" src=${plant.default_image.medium_url} alt="Image of ${plant.common_name}">
   `;
 //     plantInfoContainer.appendChild(plantInfo);
