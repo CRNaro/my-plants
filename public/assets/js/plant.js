@@ -71,6 +71,34 @@ function renderPlants(plants) {
   //console.log("IMAGE!!!!", plantImage)
     const addButton = document.createElement("button");
     addButton.textContent = "Add to My List";
+    
+    addButton.addEventListener('click', (e) => {
+      const plantCard = e.currentTarget.parentNode;
+      const watering = plantCard.dataset.watering;
+      const sunlight = plantCard.dataset.sunlight;
+    
+      const myPlantList = document.getElementById("plant_info");
+
+      const listItem = document.createElement("li");
+      listItem.innerHTML = `
+      <h3>${plantData.common_name}</h3>
+      <p>Watering: ${plantData.watering}</p>
+      <p>Sunlight: ${plantData.sunlight}</p>
+      <img class="plant-pic" src="${plantData.image_url}" alt="Image of ${plantData.name}">
+      `;
+      //console.log("myPlantList", myPlantList, plantData)
+      myPlantList.appendChild(listItem);
+
+      myPlantList.insertAdjacentHTML('beforeend', `
+        <div class="plant-card">
+          <h3>${plantCard.querySelector('h3').textContent}</h3>
+          <p>Watering: ${watering}</p>
+          <p>Sunlight: ${sunlight}</p>
+        </div>
+      `);
+    });
+//     const addBtn = document.getElementById("parent-button");
+// addBtn.addEventListener('click', addToMyList);
 //     addButton.dataset.plantId = plant.id; // Assign the plant's id to the button's data attribute
     
     //addButton.addEventListener("click", savePlantToAccount);
@@ -97,14 +125,14 @@ function renderPlants(plants) {
  };
 
  function addToMyList(event) {
-  console.log("")
+  //console.log("add plant button clicked!!!")
   const plantCard = event.currentTarget.parentNode;
-  const plantName = plantCard.querySelector('h3').textContent;
+  const plantName = plantCard.querySelector('div').textContent;
   const plantImgSrc = plantCard.querySelector('img').src;
 
   const wateringInfo = plantCard.dataset.watering || "Not specified";
   const sunlightInfo = plantCard.dataset.sunlight || "Not specified";
-
+//console.log("PlantDATA!!!", plantCard, data-watering)
   const plantData = {
     common_name: plantName,
     //description: 'No description available.',
@@ -129,16 +157,17 @@ function renderPlants(plants) {
   .catch((error) => console.error('Error:', error));
  
 
-  const listItem = document.createElement("li");
-  listItem.innerHTML = `
-  <h3>${plantData.common_name}</h3>
-  <p>Watering: ${plantData.watering}</p>
-  <p>Sunlight: ${plantData.sunlight}</p>
-  <img class="plant-pic" src="${plantData.image_url}" alt="Image of ${plantData.name}">
-  `;
+  // const listItem = document.createElement("li");
+  // listItem.innerHTML = `
+  // <h3>${plantData.common_name}</h3>
+  // <p>Watering: ${plantData.watering}</p>
+  // <p>Sunlight: ${plantData.sunlight}</p>
+  // <img class="plant-pic" src="${plantData.image_url}" alt="Image of ${plantData.name}">
+  // `;
 
-  const myPlantList = document.getElementById("plant_info");
-  myPlantList.appendChild(listItem);
+  // const myPlantList = document.getElementById("plant_info");
+  // //console.log("myPlantList", myPlantList, plantData)
+  // myPlantList.appendChild(listItem);
 
   myList.push(plantData);
   let userList = document.createElement("h3")
@@ -171,8 +200,8 @@ const submitBtn = document.getElementById("submit-btn");
 submitBtn.addEventListener('click', getPlant); 
 submitBtn.addEventListener('click', searchPlants);
 
-const addBtn = document.getElementById("parent-button");
-addBtn.addEventListener('click', addToMyList);
+// const addBtn = document.getElementById("parent-button");
+// addBtn.addEventListener('click', addToMyList);
 
 
 //     <p id="watering">${plant.watering}</p>
