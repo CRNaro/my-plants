@@ -56,16 +56,19 @@ function renderPlants(plants) {
 //   const plantInfoContainer = document.getElementById("plant-info");
   searchResultsContainer.innerHTML = "";
   return plants.map(plant => {
-    console.log("Hello Plants", plant.common_name)
+    console.log("Hello Plants", plant.sunlight[0])
     const plantCard = document.createElement("div");
     plantCard.className = "plant-card";
 // //console.log("plants!?!?!", renderPlants)
     const plantName = document.createElement("h3");
     plantName.textContent = plant.common_name;
+    let stringPlantWater = plant.watering || "Not specified";
+    let stringPlantSun = plant.sunlight[0] || "Not specified";
+
    
      const plantImage = document.createElement("img");
-     plantImage.src = plant.default_image.regular_url || "default_image_url"
-    //plant.default_image.regular_url || "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",  // need to set the image
+     plantImage.src = plant.default_image.medium_url || "default_image_url"
+    //plant.default_image.medium_url || "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",  // need to set the image
    plantImage.alt = `Image of ${plant.common_name}`;
   console.log("IMAGE!!!!", plantImage)
     const addButton = document.createElement("button");
@@ -74,7 +77,7 @@ function renderPlants(plants) {
     
     //addButton.addEventListener("click", savePlantToAccount);
  
-   plantCard.append(plantName, plantImage, addButton);  // plantImage, addButton
+    plantCard.append(plantName, document.createTextNode(`Watering: ${stringPlantWater} Sunlight: ${stringPlantSun}`), plantImage, addButton);
 
    searchResultsContainer.append(plantCard);
 
@@ -82,8 +85,9 @@ function renderPlants(plants) {
 //     plantInfo.className = "search-results";  //not plant-info
    plantInfo.innerHTML = `
      <h2 id="plant-name">${plant.common_name}</h2>
-     <p id="description">${plant.description}</p>
-    <img id="image" src=${plant.default_image.regular_url} alt="Image of ${plant.common_name}">
+     <p> id="plantWater">${stringPlantWater}</p>
+     <p> id="plantSun">${stringPlantSun}</p>
+    <img id="image" src=${plant.default_image.medium_url} alt="Image of ${plant.common_name}">
   `;
 //     plantInfoContainer.appendChild(plantInfo);
 //     console.log("Plants please!!!", plantInfo);
