@@ -4,6 +4,10 @@ const plantInfo = document.getElementsByClassName("plant-info");
 let myList = document.getElementById("plant_info")
 myList = [];
 
+function userPlantData() {
+  console.log("userPlantData", plantData)
+}
+
 async function getPlant(event) {
     event.preventDefault();
     //console.log("Button clicked")
@@ -14,6 +18,12 @@ async function getPlant(event) {
     const data = await response.json()
 
    if (response.ok) {
+    plantData = {
+      common_name: data.common_name,
+      watering: data.watering,
+      sunlight: data.sunlight,
+      image_url: data.image_url,
+};
        //console.log("RESPONSE!!!!!!", data)
       
       } else {
@@ -47,15 +57,15 @@ async function addPlant(event) {
 }
 // Render the search results to the page
 function renderPlants(plants) {
-  //console.log("YAY PLANTS!!", plants)
+ 
    const searchResultsContainer = document.getElementById("search-results");
 //   const plantInfoContainer = document.getElementById("plant-info");
   searchResultsContainer.innerHTML = "";
   return plants.map(plant => {
-   // console.log("Hello Plants", plant.sunlight[0])
+  
     const plantCard = document.createElement("div");
     plantCard.className = "plant-card";
- //console.log("plants!?!?!", renderPlants)
+ 
     const plantName = document.createElement("h3");
     plantName.textContent = plant.common_name;
     let stringPlantWater = plant.watering || "Not specified";
@@ -68,36 +78,44 @@ function renderPlants(plants) {
      plantImage.src = plant.default_image.medium_url //|| "default_image_url"
     //plant.default_image.medium_url || "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",  // need to set the image
    plantImage.alt = `Image of ${plant.common_name}`;
-  //console.log("IMAGE!!!!", plantImage)
+  
+
+  
     const addButton = document.createElement("button");
     addButton.textContent = "Add to My List";
     
     addButton.addEventListener('click', (e) => {
+      
       const plantCard = e.currentTarget.parentNode;
       const watering = plantCard.dataset.watering;
       const sunlight = plantCard.dataset.sunlight;
     
       const myPlantList = document.getElementById("plant_info");
+      e.currentTarget.remove();
+      plantCard.parentNode.removeChild(plantCard);
 
-      const listItem = document.createElement("li");
-      listItem.innerHTML = `
-      <h3>${plantData.common_name}</h3>
-      <p>Watering: ${plantData.watering}</p>
-      <p>Sunlight: ${plantData.sunlight}</p>
-      <img class="plant-pic" src="${plantData.image_url}" alt="Image of ${plantData.name}">
-      `;
-      //console.log("myPlantList", myPlantList, plantData)
-      myPlantList.appendChild(listItem);
+      // const listItem = document.createElement("li");
+      // listItem.innerHTML = `
+      // <h3>${plantData.common_name}</h3>
+      // <p>Watering: ${plantData.watering}</p>
+      // <p>Sunlight: ${plantData.sunlight}</p>
+      // <img class="plant-pic" src="${plantData.image_url}" alt="Image of ${plantData.name}">
+      // `;
+     
+
+      myPlantList.appendChild(plantCard);
+     
 
       myPlantList.insertAdjacentHTML('beforeend', `
         <div class="plant-card">
-          <h3>${plantCard.querySelector('h3').textContent}</h3>
-          <p>Watering: ${watering}</p>
-          <p>Sunlight: ${sunlight}</p>
+        <h3>${plantData.common_name}</h3>
+        <p>Watering: ${plantData.watering}</p>
+        <p>Sunlight: ${plantData.sunlight}</p>
+        <img class="plant-pic" src="${plantData.image_url}" alt="Image of ${plantData.name}">
         </div>
       `);
     });
-//     const addBtn = document.getElementById("parent-button");
+    const addBtn = document.getElementById("parent-button");
 // addBtn.addEventListener('click', addToMyList);
 //     addButton.dataset.plantId = plant.id; // Assign the plant's id to the button's data attribute
     
@@ -109,15 +127,15 @@ function renderPlants(plants) {
 
 //     const plantInfo = document.createElement("div");
 //     plantInfo.className = "search-results";  //not plant-info
-   plantInfo.innerHTML = `
-     <h2 id="plant-name">${plant.common_name}</h2>
-     <p> id="plantWater">${stringPlantWater}</p>
-     <p> id="plantSun">${stringPlantSun}</p>
+  //  plantInfo.innerHTML = `
+  //    <h2 id="plant-name">${plant.common_name}</h2>
+  //    <p> id="plantWater">${stringPlantWater}</p>
+  //    <p> id="plantSun">${stringPlantSun}</p>
 
-     <p id="description">${plant.description}</p>
+  //    <p id="description">${plant.description}</p>
 
-    <img id="image" src=${plant.default_image.medium_url} alt="Image of ${plant.common_name}">
-  `;
+  //   <img id="image" src=${plant.default_image.medium_url} alt="Image of ${plant.common_name}">
+  // `;
 //     plantInfoContainer.appendChild(plantInfo);
 //     console.log("Plants please!!!", plantInfo);
 
@@ -125,14 +143,14 @@ function renderPlants(plants) {
  };
 
  function addToMyList(event) {
-  //console.log("add plant button clicked!!!")
+
   const plantCard = event.currentTarget.parentNode;
   const plantName = plantCard.querySelector('div').textContent;
   const plantImgSrc = plantCard.querySelector('img').src;
 
   const wateringInfo = plantCard.dataset.watering || "Not specified";
   const sunlightInfo = plantCard.dataset.sunlight || "Not specified";
-//console.log("PlantDATA!!!", plantCard, data-watering)
+
   const plantData = {
     common_name: plantName,
     //description: 'No description available.',
@@ -140,7 +158,7 @@ function renderPlants(plants) {
     sunlight: sunlightInfo,
     image_url: plantImgSrc,
   };
-  //console.log("SEE PLANT!!!",plantImgSrc, plantData)
+ 
  // Send plant data to the server
 
  
