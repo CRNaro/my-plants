@@ -18,18 +18,18 @@ Plant.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        description: {
-            type: DataTypes.STRING,
-        },
+        //description: {
+            //type: DataTypes.STRING,
+       // },
         watering: {
             type: DataTypes.STRING,
         },
         sunlight: {
             type: DataTypes.STRING,
         },
-        poisonous_to_pets: {
-            type: DataTypes.BOOLEAN,
-        },
+       // poisonous_to_pets: {
+            //type: DataTypes.BOOLEAN,
+        //},
         // url for plant image
         image_url: {
             type: DataTypes.STRING,

@@ -8,12 +8,21 @@ router.post('/', async (req, res) => {
   try {
     const plantData = await Plant.create({
       common_name: req.body.common_name,
-      description: req.body.description,
+      //description: req.body.description,
       watering: req.body.watering,
       sunlight: req.body.sunlight,
-      poisonous_to_pets: req.body.poisonous_to_pets,
+      //poisonous_to_pets: req.body.poisonous_to_pets,
       image_url: req.body.image_url,
     });
+    const query = "INSERT INTO plant (common_name, description, watering, sunlight, image_url) VALUES (?, ?, ?, ?, ?)";
+      Connection.query(query, [plantData.common_name, plantData.description, plantData.watering, plantData.sunlight, plantData.image_url], (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ error: 'Failed to insert plant' });
+          return;
+        }
+        res.json(result);
+      });
     res.status(200).json(plantData);
   } catch (err) {
     res.status(400).json(err);
@@ -64,7 +73,7 @@ router.get('/plant/:id', async (req, res) => { //replace with '/:id'
   });
 
    //Delete plant from list
-   router.delete('/plant/:id', async (req, res) => {
+   router.delete('/api/plant/:id', async (req, res) => {
     try{
       const plantToDelete = await Plant.findByPk(req.params.id)
       if(!plantToDelete) {
@@ -78,18 +87,18 @@ router.get('/plant/:id', async (req, res) => { //replace with '/:id'
   }
 });
 // Saving a plant to the database
-router.post('/api/plants', (req, res) => {
-  const plantData = req.body;
+// router.post('/api/plant', (req, res) => {
+//   const plantData = req.body;
 
-  const query = "INSERT INTO plants (common_name";
-  Connection.query(query, [plantData.common_name, plantData.description, plantData.watering, plantData.sunlight, plantData.poisonous_to_pets, plantData.image_url], (err, result) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ error: 'Failed to insert plant' });
-      return;
-    }
-    res.json(result);
-  });
-});
+//   const query = "INSERT INTO plant (common_name, description, watering, sunlight, image_url) VALUES (?, ?, ?, ?, ?)";
+//   Connection.query(query, [plantData.common_name, plantData.description, plantData.watering, plantData.sunlight, plantData.image_url], (err, result) => {
+//     if (err) {
+//       console.log(err);
+//       res.status(500).json({ error: 'Failed to insert plant' });
+//       return;
+//     }
+//     res.json(result);
+//   });
+// });
 
 module.exports = router;
