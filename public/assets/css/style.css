@@ -21,7 +21,7 @@ body{
     background-image: url('/assets/plant_background.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     height: 100vh;
     overflow: auto;
     display: flex;
@@ -126,14 +126,14 @@ nav a:hover {
     align-items: left;
     justify-content: space-around;
     margin-top: 20px;
-    
+    width: 100%;
 }
 
 .plant-card {
     border: 1px solid #dddddd;
     padding: 10px;
     margin: 10px;
-    width: 20%; /* calc(100% / 5 - 20px) Adjust the width as needed, this will fit 5 cards in a row */
+    width: 60%; /* calc(100% / 5 - 20px) Adjust the width as needed, this will fit 5 cards in a row */
     text-align: center;
     border-radius: 10px;
     background-color: tan;
@@ -152,16 +152,38 @@ nav a:hover {
     font-size: small;
 }
 
+
+img{
+  max-width: 40%;
+}
+
 .my-plant-list {
     display: flex;
     flex-direction: column;
     align-items: left;
     justify-content: space-around;
     margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
 }
 .my-plant-list img {
   width: 15px; /* Adjust as needed */
   height: 15px; /* Adjust as needed */
   object-fit: cover;
   border-radius: 50%;
+}
+
+.plant-info{
+  height: 100%;
+}
+
+li{
+  list-style-type: none;
+  background-color: tan;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+
+.my-plants{
+width: 50%;
 }
