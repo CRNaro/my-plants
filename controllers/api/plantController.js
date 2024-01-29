@@ -4,29 +4,30 @@ const API_KEY = process.env.API_KEY;
 const axios = require("axios");
 
 //Add plant to database
-router.post('/', async (req, res) => {
-  try {
-    const plantData = await Plant.create({
-      common_name: req.body.common_name,
-      //description: req.body.description,
-      watering: req.body.watering,
-      sunlight: req.body.sunlight,
-      //poisonous_to_pets: req.body.poisonous_to_pets,
-      image_url: req.body.image_url,
-    });
-    const query = "INSERT INTO plant (common_name, description, watering, sunlight, image_url) VALUES (?, ?, ?, ?, ?)";
-      Connection.query(query, [plantData.common_name, plantData.description, plantData.watering, plantData.sunlight, plantData.image_url], (err, result) => {
-        if (err) {
-          console.log(err);
-          res.status(500).json({ error: 'Failed to insert plant' });
-          return;
-        }
-        res.json(result);
-      });
-    res.status(200).json(plantData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+router.post('/plant', async (req, res) => {
+  console.log("Backend???" )
+  // try {
+  //   const plantData = await Plant.create({
+  //     common_name: req.body.common_name,
+  //     //description: req.body.description,
+  //     watering: req.body.watering,
+  //     sunlight: req.body.sunlight,
+  //     //poisonous_to_pets: req.body.poisonous_to_pets,
+  //     image_url: req.body.image_url,
+  //   });
+  //   const query = "INSERT INTO plant (common_name, description, watering, sunlight, image_url) VALUES (?, ?, ?, ?, ?)";
+  //     Connection.query(query, [plantData.common_name, plantData.description, plantData.watering, plantData.sunlight, plantData.image_url], (err, result) => {
+  //       if (err) {
+  //         console.log(err);
+  //         res.status(500).json({ error: 'Failed to insert plant' });
+  //         return;
+  //       }
+  //       res.json(result);
+  //     });
+  //   res.status(200).json(plantData);
+  // } catch (err) {
+  //   res.status(400).json(err);
+//  }
 });
 
 //Display individual plant
