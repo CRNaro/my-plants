@@ -3,8 +3,8 @@ const Plant = require("../../models/Plant");
 const API_KEY = process.env.API_KEY;
 const axios = require("axios");
 
+//Add plant to database
 router.post('/', async (req, res) => {
-  console.log('hi', req.body)
   try {
     const plantData = await Plant.create({
       common_name: req.body.common_name,
