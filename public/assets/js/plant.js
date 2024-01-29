@@ -65,8 +65,10 @@ function renderPlants(plants) {
     let stringPlantWater = plant.watering || "Not specified";
     let stringPlantSun = plant.sunlight[0] || "Not specified";
 
-   
-     const plantImage = document.createElement("img");
+    plantCard.dataset.watering = stringPlantWater;
+    plantCard.dataset.sunlight = stringPlantSun;
+
+    const plantImage = document.createElement("img");
      plantImage.src = plant.default_image.medium_url || "default_image_url"
     //plant.default_image.medium_url || "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",  // need to set the image
    plantImage.alt = `Image of ${plant.common_name}`;
@@ -103,14 +105,22 @@ addButton.addEventListener('click', addToMyList);
   const plantCard = event.currentTarget.parentNode;
   const plantName = plantCard.querySelector('h3').textContent;
   const plantImgSrc = plantCard.querySelector('img').src;
+
+  const wateringInfo = plantCard.dataset.watering || "Not specified";
+  const sunglightInfo = plantCard.dataset.sunlight || "Not specified";
+
   const plantData = {
     name: plantName,
     imageSrc: plantImgSrc,
+    watering: wateringInfo,
+    sunlight: sunglightInfo,
   };
 
   const listItem = document.createElement("li");
   listItem.innerHTML = `
   <h3>${plantData.name}</h3>
+  <p>Watering: ${plantData.watering}</p>
+  <p>Sunlight: ${plantData.sunlight}</p>
   <img src="${plantData.imageSrc}" alt="Image of ${plantData.name}">
   `;
 
