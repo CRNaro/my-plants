@@ -6,15 +6,15 @@ myList = [];
 
 async function getPlant(event) {
     event.preventDefault();
-    console.log("Button clicked")
+    //console.log("Button clicked")
     const plantName = document.getElementById("user-input").value;
-    console.log(plantName);
+    //console.log(plantName);
     const plantDataURL = `/api/plant?plantName=${plantName}` //added crn
     const response = await fetch(plantDataURL)
     const data = await response.json()
 
    if (response.ok) {
-       console.log("RESPONSE!!!!!!", data)
+       //console.log("RESPONSE!!!!!!", data)
       
       } else {
        alert(response.statusText);
@@ -30,32 +30,32 @@ async function addPlant(event) {
     const sunlight = document.getElementById("sun").value;
     const poisonous_to_pets = document.getElementById("poison").value;
     const image_url = document.getElementById("image").value;
-    const response = await fetch('/api/plant', {
-        method: 'POST',
-        body: JSON.stringify({ common_name, description, watering, sunlight, poisonous_to_pets, image_url }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const responseData = await response.json();
-   console.log('Plants!!!', addPlant)
-      if (response.ok) {
-        // If successful, redirect the browser to the home page
-        document.location.replace('/home'); 
-        alert('Plant Saved')
-      } else {
-        alert(response.statusText);
-      }
+  //   const response = await fetch('/api/plant', {
+  //       method: 'POST',
+  //       body: JSON.stringify({ common_name, description, watering, sunlight, poisonous_to_pets, image_url }),
+  //       headers: { 'Content-Type': 'application/json' },
+  //     });
+  //     const responseData = await response.json();
+  //  //console.log('Plants!!!', addPlant)
+  //     if (response.ok) {
+  //       // If successful, redirect the browser to the home page
+  //       document.location.replace('/home'); 
+  //       alert('Plant Saved')
+  //     } else {
+  //       alert(response.statusText);
+  //     }
 }
 // Render the search results to the page
 function renderPlants(plants) {
-  console.log("YAY PLANTS!!", plants)
+  //console.log("YAY PLANTS!!", plants)
    const searchResultsContainer = document.getElementById("search-results");
 //   const plantInfoContainer = document.getElementById("plant-info");
   searchResultsContainer.innerHTML = "";
   return plants.map(plant => {
-    console.log("Hello Plants", plant.sunlight[0])
+   // console.log("Hello Plants", plant.sunlight[0])
     const plantCard = document.createElement("div");
     plantCard.className = "plant-card";
-// //console.log("plants!?!?!", renderPlants)
+ //console.log("plants!?!?!", renderPlants)
     const plantName = document.createElement("h3");
     plantName.textContent = plant.common_name;
     let stringPlantWater = plant.watering || "Not specified";
@@ -68,7 +68,7 @@ function renderPlants(plants) {
      plantImage.src = plant.default_image.medium_url //|| "default_image_url"
     //plant.default_image.medium_url || "https://perenual.com/storage/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg",  // need to set the image
    plantImage.alt = `Image of ${plant.common_name}`;
-  console.log("IMAGE!!!!", plantImage)
+  //console.log("IMAGE!!!!", plantImage)
     const addButton = document.createElement("button");
     addButton.textContent = "Add to My List";
 //     addButton.dataset.plantId = plant.id; // Assign the plant's id to the button's data attribute
@@ -93,11 +93,11 @@ function renderPlants(plants) {
 //     plantInfoContainer.appendChild(plantInfo);
 //     console.log("Plants please!!!", plantInfo);
 
-addButton.addEventListener('click', addToMyList);
   });
  };
 
  function addToMyList(event) {
+  console.log("")
   const plantCard = event.currentTarget.parentNode;
   const plantName = plantCard.querySelector('h3').textContent;
   const plantImgSrc = plantCard.querySelector('img').src;
@@ -112,9 +112,11 @@ addButton.addEventListener('click', addToMyList);
     sunlight: sunlightInfo,
     image_url: plantImgSrc,
   };
-  console.log("SEE PLANT!!!",plantImgSrc, plantData)
+  //console.log("SEE PLANT!!!",plantImgSrc, plantData)
  // Send plant data to the server
-fetch('/api/plant', {
+
+ 
+ fetch('/api/plant', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -122,9 +124,10 @@ fetch('/api/plant', {
   body: JSON.stringify(plantData),
 })
   .then((response) => response.json())
+  //console.log("talk to me!!!!", response)
   .then((data) => console.log('Success in adding plant:', data))
   .catch((error) => console.error('Error:', error));
-  
+ 
 
   const listItem = document.createElement("li");
   listItem.innerHTML = `
@@ -168,8 +171,8 @@ const submitBtn = document.getElementById("submit-btn");
 submitBtn.addEventListener('click', getPlant); 
 submitBtn.addEventListener('click', searchPlants);
 
-const addBtn = document.getElementById("add-btn");
-//addBtn.addEventListener('click', addPlant);
+const addBtn = document.getElementById("parent-button");
+addBtn.addEventListener('click', addToMyList);
 
 
 //     <p id="watering">${plant.watering}</p>
