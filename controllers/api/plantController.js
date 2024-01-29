@@ -77,6 +77,19 @@ router.get('/plant/:id', async (req, res) => { //replace with '/:id'
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+// Saving a plant to the database
+router.post('/api/plants', (req, res) => {
+  const plantData = req.body;
 
+  const query = "INSERT INTO plants (common_name";
+  Connection.query(query, [plantData.common_name, plantData.description, plantData.watering, plantData.sunlight, plantData.poisonous_to_pets, plantData.image_url], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ error: 'Failed to insert plant' });
+      return;
+    }
+    res.json(result);
+  });
+});
 
 module.exports = router;
