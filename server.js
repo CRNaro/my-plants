@@ -23,7 +23,7 @@ const sess = {
   cookie: {
     maxAge: 3600000,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+    //secure: process.env.NODE_ENV === "production", // Use secure cookies in production
     sameSite: "strict",
   },
   resave: false,

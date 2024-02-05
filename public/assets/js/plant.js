@@ -8,6 +8,7 @@ function userPlantData() {
   console.log("userPlantData", plantData)
 }
 
+
 async function getPlant(event) {
     event.preventDefault();
     //console.log("Button clicked")
@@ -24,7 +25,7 @@ async function getPlant(event) {
       sunlight: data.sunlight,
       image_url: data.image_url,
 };
-       //console.log("RESPONSE!!!!!!", data)
+     
       
       } else {
        alert(response.statusText);
@@ -105,16 +106,20 @@ function renderPlants(plants) {
 
       myPlantList.appendChild(plantCard);
      
-
+      //*!!*This is adding both cards somehow.  The top is rendered first followed by the bottom
       myPlantList.insertAdjacentHTML('beforeend', `
-        <div class="plant-card">
-        <h3>${plantData.common_name}</h3>
-        <p>Watering: ${plantData.watering}</p>
-        <p>Sunlight: ${plantData.sunlight}</p>
-        <img class="plant-pic" src="${plantData.image_url}" alt="Image of ${plantData.name}">
-        </div>
+      
       `);
     });
+      //Took the following out of the "insertAdjacentHTML" above
+    // because it was adding the second 'undefined' card -CRN
+    //  <div class="plant-card">
+    // <h3>${plantData.common_name}</h3>
+    // <p>Watering: ${plantData.watering}</p>
+    // <p>Sunlight: ${plantData.sunlight}</p>
+    // <img class="plant-pic" src="${plantData.image_url}" alt="Image of ${plantData.name}">
+    // </div>
+
     const addBtn = document.getElementById("parent-button");
 // addBtn.addEventListener('click', addToMyList);
 //     addButton.dataset.plantId = plant.id; // Assign the plant's id to the button's data attribute
